@@ -3,11 +3,11 @@
 #include "CargaPontual.h"
 #include "FioCarregado.h"
 
-class CargaDeProva: public CargaPontual
+class CargaDeProva : public CargaPontual
 {
 private:
 	float m;
-//	const float g;
+	//	const float g;
 	sf::Vector2f v;
 	sf::Vector2f a;
 	sf::Vector2f forca;

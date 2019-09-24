@@ -6,7 +6,7 @@ Simulacao::Simulacao()
 {
 	//fio = NULL;
 	//carga = NULL;
-	
+
 	window = new sf::RenderWindow(sf::VideoMode(640, 520), "Simulação fio carregado", sf::Style::Close);
 	fio = new FioCarregado(500);
 	carga = new CargaDeProva(1.0f);
@@ -24,7 +24,7 @@ void Simulacao::executar()
 {
 	bool pause = false;
 	carga->setPosicao(sf::Vector2f(360.0f, 410.0f)); //r.y ~ 300
-	carga->setSize(sf::Vector2f(5.0f, 5.f));
+	carga->setSize(sf::Vector2f(5.0f, 5.0f));
 	carga0->setPosicao(sf::Vector2f(300.f, 220.0f));
 	carga0->setSize(sf::Vector2f(4.0f, 4.0f));
 	carga0->getCorpo().setFillColor(sf::Color::Blue);
@@ -62,6 +62,16 @@ void Simulacao::executar()
 			pause = false;
 		}
 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R))
+		{
+			pause = true;
+			delete(carga);
+			carga = new CargaDeProva(1.0f);
+			carga->setQ(5.0f);
+			carga->setPosicao(sf::Vector2f(360.0f, 410.0f)); //r.y ~ 300
+			carga->setSize(sf::Vector2f(5.0f, 5.0f));
+		}
+
 		if (!pause)
 		{
 			carga->CalculaForca(fio);
@@ -73,7 +83,7 @@ void Simulacao::executar()
 			//carga0->Draw(*window);
 			fio->Draw(*window);
 			window->display();
-			
+
 			using namespace std::this_thread;
 			using namespace std::chrono_literals;
 			using std::chrono::system_clock;

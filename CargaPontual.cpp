@@ -2,13 +2,13 @@
 
 CargaPontual::CargaPontual()
 {
-	q = 0.001f;
+	q = 0.1f;
 	//d.x = 0.0f;
 	//d.y = 0.0f;
 
 	corpo = new sf::RectangleShape();
 	corpo->setSize(sf::Vector2f(30.0f, 30.0f));
-	corpo->setPosition(sf::Vector2f(0.0f,0.0f));
+	corpo->setPosition(sf::Vector2f(0.0f, 0.0f));
 	corpo->setOrigin(corpo->getSize() / 2.0f);
 	corpo->setFillColor(sf::Color::White);
 }

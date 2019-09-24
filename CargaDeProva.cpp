@@ -1,6 +1,6 @@
 #include "CargaDeProva.h"
 
-CargaDeProva::CargaDeProva(float M):
+CargaDeProva::CargaDeProva(float M) :
 	CargaPontual()
 	//g(10.0f)
 {
@@ -16,7 +16,7 @@ CargaDeProva::~CargaDeProva()
 
 void CargaDeProva::Update()
 {
-	float deltatime = 0.0001f;
+	float deltatime = 1.0f;
 	cout << "f.x: " << forca.x << " f.y: " << forca.y << endl;
 
 	a.x = forca.x / m;
@@ -26,7 +26,7 @@ void CargaDeProva::Update()
 	v.y += a.y * deltatime;
 	cout << "a.x: " << a.x << "a.y: " << a.y << endl;
 	if (corpo->getPosition().y < 500.0f && corpo->getPosition().y > 5.0f)
-		corpo->move(v*deltatime);
+		corpo->move(v * deltatime);
 
 	//corpo->move(sf::Vector2f(1.0f, 1.0f));
 	//this->setPosicao(d);
@@ -40,7 +40,7 @@ void CargaDeProva::CalculaForca(FioCarregado* fio)
 	float norma_r;
 	float g = 10.0f;
 	int tam = fio->getQtdCargas();
-	float k = 9 * 1000000000;
+	//float k = 9 * 1000000000;
 	forca.x = forca.y = 0.0f;
 
 	for (int i = 0; i < tam; i++)
@@ -57,8 +57,8 @@ void CargaDeProva::CalculaForca(FioCarregado* fio)
 		versor_r = sf::Vector2f(r.x / norma_r, r.y / norma_r);
 
 		//calcula vetor forca
-		forca.x += k * q * fio->getCargas()[i]->getQ() * versor_r.x / (norma_r * norma_r);
-		forca.y += k * q * fio->getCargas()[i]->getQ() * versor_r.y / (norma_r * norma_r);
+		forca.x += q * fio->getCargas()[i]->getQ() * versor_r.x / (norma_r * norma_r);
+		forca.y += q * fio->getCargas()[i]->getQ() * versor_r.y / (norma_r * norma_r);
 
 		//cout << "f.x: " << forca.x << " f.y: " << forca.y << endl;
 	}
@@ -69,14 +69,14 @@ void CargaDeProva::CalculaForca(FioCarregado* fio)
 	//recalcular força
 }
 
-void CargaDeProva::CalculaForcaQPontual(CargaPontual * q0)
+void CargaDeProva::CalculaForcaQPontual(CargaPontual* q0)
 {
 	sf::Vector2f r;
 	sf::Vector2f versor_r;
 	float norma_r;
 	//float g = 10.0f;
 	//int tam = fio->getQtdCargas();
-	double k = 9 * 1000000000;
+	//double k = 9 * 1000000000;
 	forca.x = forca.y = 0.0f;
 
 	r.x = (corpo->getPosition().x - (q0->getPosicao().x));
@@ -92,9 +92,9 @@ void CargaDeProva::CalculaForcaQPontual(CargaPontual * q0)
 
 
 	//calcula vetor forca
-	forca.x =  q * q0->getQ() * versor_r.x / (norma_r * norma_r);
-	forca.y =  q * q0->getQ() * versor_r.y / (norma_r * norma_r);
+	forca.x = q * q0->getQ() * versor_r.x / (norma_r * norma_r);
+	forca.y = q * q0->getQ() * versor_r.y / (norma_r * norma_r);
 
-	cout << " k: " << k << " q: " << q << " q0: " << q0->getQ() << " vrx: " << versor_r.x <<
+	cout << " q: " << q << " q0: " << q0->getQ() << " vrx: " << versor_r.x <<
 		" vry: " << versor_r.y << " norma r: " << norma_r << endl;
 }
