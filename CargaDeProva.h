@@ -7,7 +7,7 @@ class CargaDeProva: public CargaPontual
 {
 private:
 	float m;
-	const float g;
+//	const float g;
 	sf::Vector2f v;
 	sf::Vector2f a;
 	sf::Vector2f forca;
@@ -19,7 +19,7 @@ public:
 	void Update();
 
 	void CalculaForca(FioCarregado* fio);
-
+	void CalculaForcaQPontual(CargaPontual* q0);
 	void setMassa(float M) { m = M; }
 	float getMassa() { return m; }
 

@@ -9,6 +9,7 @@ private:
 
 	FioCarregado* fio;
 	CargaDeProva* carga;
+	CargaPontual* carga0;
 
 public:
 	Simulacao();
