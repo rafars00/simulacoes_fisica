@@ -1,4 +1,4 @@
 # simulacoes_fisica
 Simulação fio carregado desenvolvida em C++ com a biblioteca gráfica SFML.
 
-A classe Interação foi criada, mas não é usada (pelo menos por enquanto) no programa.
+As classes sendo usadas atualmente são CargaPontual, FioCarregado, Interacao e Simulacao.
