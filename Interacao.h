@@ -1,20 +1,15 @@
 #pragma once
 #include "FioCarregado.h"
-#include "CargaDeProva.h"
 
-class Simulacao
+
+class Interacao
 {
 private:
-	FioCarregado fio;
-	CargaDeProva carga;
+
 
 public:
-	Simulacao();
-	~Simulacao();
-
-	void simulacao();
-
-	sf::Vector2f ForcaInteracao(CargaDeProva* carga_p, CargaPontual* carga);
-
+	Interacao();
+	~Interacao();
+	void calculaForcaCondutor(FioCarregado* Fio); // entre as cargas i x j do fio
 };
 

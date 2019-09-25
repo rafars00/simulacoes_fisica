@@ -1,40 +1,52 @@
-#include "Simulacao.h"
+#include "Interacao.h"
 
-Simulacao::Simulacao():
-	fio(5)
+Interacao::Interacao()
 {
 }
 
-Simulacao::~Simulacao()
+Interacao::~Interacao()
 {
 }
 
-void Simulacao::simulacao()
+void Interacao::calculaForcaCondutor(FioCarregado* Fio)
 {
-}
-
-sf::Vector2f Simulacao::ForcaInteracao(CargaDeProva* carga_p, CargaPontual* carga)
-{
-	sf::Vector2f forca;
 	sf::Vector2f r;
+	sf::Vector2f Forca;
 	sf::Vector2f versor_r;
-	float norma_r;
+	long double norma_r;
 
-	//calcula r
-	r.x = (carga_p->getD().x - carga->getD().x);
-	r.y = (carga_p->getD().y - carga->getD().y);
+	for (int i = 0; i < Fio->getCargas().size(); i++)
+	{
+		Forca.x = Forca.y = versor_r.x = versor_r.y = r.x = r.y = norma_r = 0.0f;
 
-	//calcula norma de r
-	norma_r = sqrt(r.x * r.x + r.y + r.y);
+		for (int j = 0; j < Fio->getCargas().size(); j++)
+		{
+			
+			if (i != j)
+			{
+				//calcula vetor r (vetor distancia da carga de prova até a origem subtraido
+				//do vetor distancia da carga pontual até a origem)
+				r.x = ((Fio->getCargas())[i]->getPosicao().x - (Fio->getCargas())[j]->getPosicao().x);
+				r.y = ((Fio->getCargas())[i]->getPosicao().y - (Fio->getCargas())[j]->getPosicao().y);
 
-	//calcula versor r
-	versor_r.x = r.x / norma_r;
-	versor_r.y = r.y / norma_r;
+				//calcula norma do vetor r
+				norma_r = sqrt(r.x * r.x + r.y * r.y);
 
-	//calcula vetor forca
-	forca.x = carga_p->getQ() * carga->getQ() * versor_r.x / norma_r * norma_r;
-	forca.y = carga_p->getQ() * carga->getQ() * versor_r.y / norma_r * norma_r;
+				//calcula versor do vetor r
+				versor_r = sf::Vector2f(r.x / norma_r, r.y / norma_r);
 
-	//retorna vetor forca
-	return forca;
+				//calcula vetor forca
+				Forca.x += Fio->getCargas()[i]->getQ() * Fio->getCargas()[j]->getQ() * versor_r.x / (norma_r * norma_r);
+				Forca.y += Fio->getCargas()[i]->getQ() * Fio->getCargas()[j]->getQ() * versor_r.y / (norma_r * norma_r);
+			}
+			
+
+			
+		}
+
+		Fio->getCargas()[i]->setForcaR(Forca);
+	}
+
+
+
 }

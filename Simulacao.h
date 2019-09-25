@@ -1,6 +1,6 @@
 #pragma once
-#include "FioCarregado.h"
-#include "CargaDeProva.h"
+
+#include "Interacao.h"
 
 class Simulacao
 {
@@ -8,14 +8,12 @@ private:
 	sf::RenderWindow* window;
 
 	FioCarregado* fio;
-	CargaDeProva* carga;
-	CargaPontual* carga0;
+	CargaPontual* carga;
+	Interacao* interacao;
 
 public:
 	Simulacao();
 	~Simulacao();
 
 	void executar();
-
 };
-

@@ -3,7 +3,6 @@
 FioCarregado::FioCarregado(int n_cargas)
 {
 	qtd_cargas = n_cargas;
-	setFio();
 }
 
 FioCarregado::~FioCarregado()
@@ -17,7 +16,16 @@ FioCarregado::~FioCarregado()
 	carga.clear();
 }
 
-void FioCarregado::setFio()
+void FioCarregado::Draw(sf::RenderWindow& window)
+{
+	for (int i = 0; i < qtd_cargas; i++)
+	{
+		CargaPontual* c = carga[i];
+		c->draw(window);
+	}
+}
+
+void FioCarregado::setFioHorizontal()
 {
 	sf::Vector2f d;
 	d.x = 50.0f;
@@ -34,11 +42,27 @@ void FioCarregado::setFio()
 	}
 }
 
-void FioCarregado::Draw(sf::RenderWindow& window)
+void FioCarregado::setFioHorizontalAleatorio()
+{
+	sf::Vector2f d;
+	int limiteEsq, limiteDir;
+	limiteEsq = 50;
+	limiteDir = 650;
+
+	for (int i = 0; i < qtd_cargas; i++)
+	{
+		CargaPontual* nova_carga = new CargaPontual();
+		nova_carga->setPosicao(sf::Vector2f(130.0f + i * 7.0f, 300.0f));
+		nova_carga->setSize(sf::Vector2f(2.0f, 10.0f));
+		carga.push_back(nova_carga);
+	}
+}
+
+void FioCarregado::update()
 {
 	for (int i = 0; i < qtd_cargas; i++)
 	{
 		CargaPontual* c = carga[i];
-		c->Draw(window);
+		c->update();
 	}
 }

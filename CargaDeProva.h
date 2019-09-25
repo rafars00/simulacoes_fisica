@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "CargaPontual.h"
 #include "FioCarregado.h"
@@ -28,5 +28,5 @@ public:
 
 	void setAceleracao(sf::Vector2f A) { a = A; }
 	sf::Vector2f getAceleracao() { return a; }
-};
+};*/
 

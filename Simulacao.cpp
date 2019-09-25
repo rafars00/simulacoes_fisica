@@ -4,16 +4,11 @@
 
 Simulacao::Simulacao()
 {
-	//fio = NULL;
-	//carga = NULL;
+	carga = NULL;
+	interacao = new Interacao();
 
-	window = new sf::RenderWindow(sf::VideoMode(640, 520), "Simulação fio carregado", sf::Style::Close);
-	fio = new FioCarregado(500);
-	carga = new CargaDeProva(1.0f);
-	carga->setQ(5.0f);
-	carga0 = new CargaPontual();
-
-
+	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Simulação fio carregado", sf::Style::Close);
+	fio = new FioCarregado(25);
 }
 
 Simulacao::~Simulacao()
@@ -23,32 +18,24 @@ Simulacao::~Simulacao()
 void Simulacao::executar()
 {
 	bool pause = false;
-	carga->setPosicao(sf::Vector2f(360.0f, 410.0f)); //r.y ~ 300
-	carga->setSize(sf::Vector2f(5.0f, 5.0f));
-	carga0->setPosicao(sf::Vector2f(300.f, 220.0f));
-	carga0->setSize(sf::Vector2f(4.0f, 4.0f));
-	carga0->getCorpo().setFillColor(sf::Color::Blue);
-	sf::RectangleShape t;
-	t.setPosition(sf::Vector2f(300.0f, 400.0f));
-	t.setFillColor(sf::Color::Blue);
-	t.setSize(sf::Vector2f(5.f, 50.0f));
+	fio->setFioHorizontalAleatorio();
+
 	while (window->isOpen())
 	{
 		sf::Event evnt;
 
-		//ver sfml tutorial
-		//acho que tem que mexer em coisa de fps
-		//ele ta atualizando a posicao em blocos e o bloco ta teleportando
+		//fio->setFioHorizontalAleatorio();
 
 		while (window->pollEvent(evnt))
 		{
 			switch (evnt.type)
 			{
 			case sf::Event::Closed:
+				cout << "eu chego aqui pora" << endl;
 				window->close();
 				break;
 			default:
-				//cout << "eu chego aqui" << endl;
+				cout << "eu chego aqui" << endl;
 				break;
 			}
 		}
@@ -65,34 +52,32 @@ void Simulacao::executar()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::R))
 		{
 			pause = true;
-			delete(carga);
-			carga = new CargaDeProva(1.0f);
-			carga->setQ(5.0f);
-			carga->setPosicao(sf::Vector2f(360.0f, 410.0f)); //r.y ~ 300
-			carga->setSize(sf::Vector2f(5.0f, 5.0f));
 		}
 
 		if (!pause)
 		{
-			carga->CalculaForca(fio);
-			carga->Update();
 			window->clear();
-			//window->draw(t);
-			window->draw(carga->getCorpo());
-			carga->Draw(*window);
-			//carga0->Draw(*window);
+			//carga->draw(*window);
+
+
+			// Calcula força entre cargas do condutor
+			interacao->calculaForcaCondutor(fio);
+			fio->update();
+
 			fio->Draw(*window);
+
 			window->display();
 
-			using namespace std::this_thread;
-			using namespace std::chrono_literals;
-			using std::chrono::system_clock;
-			//sleep_for(1s);
-			//sleep_until(system_clock::now() + 1s);
+			//using namespace std::this_thread;
+			//using namespace std::chrono_literals;
+			//using std::chrono::system_clock;
 		}
 	}
 
-	delete(carga);
+	cout << "cabei" << endl;
+
+	//delete(carga);
+	delete(interacao);
 	delete(fio);
 }
 

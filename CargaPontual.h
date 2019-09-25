@@ -1,25 +1,36 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
+
+using namespace std;
+
+
 
 class CargaPontual
 {
 protected:
-	sf::RectangleShape* corpo;
-	//sf::Vector2f d;
-	float q;
-
+	long double m;
+	sf::Vector2f v;
+	sf::Vector2f a;
+	sf::Vector2f forcaR;
+	sf::RectangleShape corpo;
+	long double q;
 
 public:
 	CargaPontual();
 	~CargaPontual();
-	void setQ(float Q) { q = Q; }
-	float getQ() { return q; }
 
+	sf::Vector2f getPosicao();
 	void setPosicao(sf::Vector2f D);
-	sf::Vector2f getPosicao() { return corpo->getPosition(); }
+	sf::Vector2f getForcaR() { return forcaR; }
+	void setForcaR(sf::Vector2f Fr) { forcaR = Fr; }
+	long double getQ() { return q; }
+	void setQ(long double Q) { q = Q; }
 
-	void setSize(sf::Vector2f tam) { corpo->setSize(tam); }
-	sf::RectangleShape& getCorpo() { return (*corpo); }
-	void Draw(sf::RenderWindow& window) { window.draw(*corpo); }
+	void setSize(sf::Vector2f s) { corpo.setSize(s); }
+	void draw(sf::RenderWindow& window) { window.draw(corpo); }
+
+	void update();
+
 };
 

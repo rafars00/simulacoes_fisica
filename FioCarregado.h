@@ -1,10 +1,9 @@
 #pragma once
-
 #include <vector>
 #include <iostream>
-using namespace std;
 #include "CargaPontual.h"
 
+using namespace std;
 
 class FioCarregado
 {
@@ -16,11 +15,12 @@ public:
 	FioCarregado(int n_cargas);
 	~FioCarregado();
 
-	void setFio();
-
 	vector<CargaPontual*> getCargas() { return carga; }
 
 	void Draw(sf::RenderWindow& window);
+	void setFioHorizontal();
+	void setFioHorizontalAleatorio();
+	void update();
 
 	int getQtdCargas() { return qtd_cargas; }
 };

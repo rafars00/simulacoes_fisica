@@ -1,4 +1,4 @@
-#include "CargaDeProva.h"
+/*#include "CargaDeProva.h"
 
 CargaDeProva::CargaDeProva(float M) :
 	CargaPontual()
@@ -97,4 +97,4 @@ void CargaDeProva::CalculaForcaQPontual(CargaPontual* q0)
 
 	cout << " q: " << q << " q0: " << q0->getQ() << " vrx: " << versor_r.x <<
 		" vry: " << versor_r.y << " norma r: " << norma_r << endl;
-}
+}*/
