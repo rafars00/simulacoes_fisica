@@ -50,3 +50,14 @@ void Interacao::calculaForcaCondutor(FioCarregado* Fio)
 
 
 }
+
+void Interacao::correnteEletrica(FioCarregado * fio)
+{
+	for (int i = 0; i < fio->getQtdCargas(); i++)
+	{
+		if (fio->getCargas()[i]->getPosicao().x >= 699.0f && fio->getCargas()[i]->getPosicao().x <= 701.0f)
+		{
+			fio->getCargas()[i]->setPosicao(sf::Vector2f(100.5f,fio->getCargas()[i]->getPosicao().y));
+		}
+	}
+}

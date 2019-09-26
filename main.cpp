@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "CargaDeProva.h"
+//#include "CargaDeProva.h"
 #include "FioCarregado.h"
 #include "Simulacao.h"
 

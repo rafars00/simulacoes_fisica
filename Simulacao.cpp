@@ -62,6 +62,7 @@ void Simulacao::executar()
 
 			// Calcula força entre cargas do condutor
 			interacao->calculaForcaCondutor(fio);
+			interacao->correnteEletrica(fio);
 			fio->update();
 
 			fio->Draw(*window);

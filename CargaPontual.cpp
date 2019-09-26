@@ -4,7 +4,7 @@ CargaPontual::CargaPontual()
 {
 	m = 1;
 	q = 0.5f;
-
+	
 	corpo.setSize(sf::Vector2f(30.0f, 30.0f));
 	corpo.setPosition(sf::Vector2f(0.0f, 0.0f));
 	corpo.setOrigin(corpo.getSize() / 2.0f);
@@ -28,9 +28,10 @@ void CargaPontual::setPosicao(sf::Vector2f D)
 void CargaPontual::update()
 {
 	float deltatime = 1.0f;
+	float ga = 0.001f;
 
-	a.x = forcaR.x / m;
-	a.y = forcaR.y / m;
+	a.x = forcaR.x / m - ga*v.x/m;
+	a.y = forcaR.y / m - ga*v.y/m;
 
 	v.x += a.x * deltatime;
 	v.y += a.y * deltatime;
