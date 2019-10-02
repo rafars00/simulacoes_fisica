@@ -27,6 +27,8 @@ public:
 	long double getQ() { return q; }
 	void setQ(long double Q) { q = Q; }
 
+	void setColor(sf::Color c) { corpo.setFillColor(c); }
+
 	void setSize(sf::Vector2f s) { corpo.setSize(s); }
 	void draw(sf::RenderWindow& window) { window.draw(corpo); }
 

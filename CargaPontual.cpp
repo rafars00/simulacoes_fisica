@@ -27,7 +27,7 @@ void CargaPontual::setPosicao(sf::Vector2f D)
 
 void CargaPontual::update()
 {
-	float deltatime = 1.0f;
+	float deltatime = 0.4f;
 	float ga = 0.001f;
 
 	a.x = forcaR.x / m - ga*v.x/m;

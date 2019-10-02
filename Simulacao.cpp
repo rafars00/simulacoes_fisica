@@ -8,7 +8,7 @@ Simulacao::Simulacao()
 	interacao = new Interacao();
 
 	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Simulação fio carregado", sf::Style::Close);
-	fio = new FioCarregado(25);
+	fio = new FioCarregado(40);
 }
 
 Simulacao::~Simulacao()
@@ -18,6 +18,7 @@ Simulacao::~Simulacao()
 void Simulacao::executar()
 {
 	bool pause = false;
+	bool corrente = false;
 	fio->setFioHorizontalAleatorio();
 
 	while (window->isOpen())
@@ -31,11 +32,11 @@ void Simulacao::executar()
 			switch (evnt.type)
 			{
 			case sf::Event::Closed:
-				cout << "eu chego aqui pora" << endl;
+				//cout << "eu chego aqui pora" << endl;
 				window->close();
 				break;
 			default:
-				cout << "eu chego aqui" << endl;
+				//cout << "eu chego aqui" << endl;
 				break;
 			}
 		}
@@ -54,6 +55,15 @@ void Simulacao::executar()
 			pause = true;
 		}
 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::L))
+		{
+			corrente = true;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+		{
+			corrente = false;
+		}
+
 		if (!pause)
 		{
 			window->clear();
@@ -62,8 +72,14 @@ void Simulacao::executar()
 
 			// Calcula força entre cargas do condutor
 			interacao->calculaForcaCondutor(fio);
-			interacao->correnteEletrica(fio);
+			
+			if(corrente)
+				interacao->correnteEletrica(fio);
+			
 			fio->update();
+
+			cout << "ultima carga: " << fio->getCargas()[24]->getPosicao().x <<
+				" segunda carga: " << fio->getCargas()[1]->getPosicao().x << endl;
 
 			fio->Draw(*window);
 

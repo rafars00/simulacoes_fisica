@@ -46,14 +46,30 @@ void FioCarregado::setFioHorizontalAleatorio()
 {
 	sf::Vector2f d;
 	int limiteEsq, limiteDir;
+	int k = 1;
 	limiteEsq = 50;
 	limiteDir = 650;
 
 	for (int i = 0; i < qtd_cargas; i++)
 	{
 		CargaPontual* nova_carga = new CargaPontual();
-		nova_carga->setPosicao(sf::Vector2f(130.0f + i * 7.0f, 300.0f));
+		nova_carga->setPosicao(sf::Vector2f(110.0f + i * 4.0f, 300.0f));
 		nova_carga->setSize(sf::Vector2f(2.0f, 10.0f));
+		if(k==1)
+		{
+			nova_carga->setColor(sf::Color::Red);
+			k++;
+		}
+		else if (k == 2)
+		{
+			nova_carga->setColor(sf::Color::Yellow);
+			k++;
+		}
+		else if (k == 3)
+		{
+			nova_carga->setColor(sf::Color::Green);
+			k = 1;
+		}
 		carga.push_back(nova_carga);
 	}
 }
