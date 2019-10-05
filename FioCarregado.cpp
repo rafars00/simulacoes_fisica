@@ -53,8 +53,10 @@ void FioCarregado::setFioHorizontalAleatorio()
 	for (int i = 0; i < qtd_cargas; i++)
 	{
 		CargaPontual* nova_carga = new CargaPontual();
-		nova_carga->setPosicao(sf::Vector2f(110.0f + i * 4.0f, 300.0f));
+		nova_carga->setPosicao(sf::Vector2f(270.0f + i * 10.0f, 300.0f));
 		nova_carga->setSize(sf::Vector2f(2.0f, 10.0f));
+
+		//alterna cores
 		if(k==1)
 		{
 			nova_carga->setColor(sf::Color::Red);

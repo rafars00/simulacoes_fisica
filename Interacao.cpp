@@ -61,3 +61,66 @@ void Interacao::correnteEletrica(FioCarregado * fio)
 		}
 	}
 }
+
+float Interacao::calculaPotencial(FioCarregado* fio, sf::Vector2f posicao)
+{
+	float v = 0;
+	long double r;
+
+	cout << "ENTREI NO CALCULAPOTENCIAL" << endl;
+
+	for (int i = 0; i < fio->getQtdCargas(); i++)
+	{
+		//calcula norma do vetor r (distancia entre uma carga do fio e o ponto especificado)
+		r = sqrt((posicao.x - fio->getCargas()[i]->getPosicao().x) * (posicao.x - fio->getCargas()[i]->getPosicao().x) +
+			(posicao.y - fio->getCargas()[i]->getPosicao().y) * (posicao.y - fio->getCargas()[i]->getPosicao().y));
+
+		//calcula diferenca de potencial no ponto especificado, tomando o infinito como referencia
+		v += (fio->getCargas()[i])->getQ() / r;
+	}
+
+	cout << "SAI DO FOR" << endl;
+
+	return v;
+}
+
+void Interacao::calculaSuperficiesEquipotenciais(FioCarregado* fio, float alto, float baixo, float esq, float dir,
+												SuperficieEquipotencial* sup)
+{
+	//sf::RectangleShape ponto;
+	float v;
+
+	cout << "ENTREI AQUI" << endl;
+
+	for (int i = (int) esq; i < (int) dir; i++)
+	{
+		for (int j = (int) alto; j < (int) baixo; j++)
+		{
+			v = calculaPotencial(fio, sf::Vector2f(i, j));
+
+			cout << "AGORA AQUI" << endl;
+
+			if (v >= 0.0797f && v <= 0.0803)
+			{
+
+				cout << "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" << endl;
+				//sf::RectangleShape ponto
+				//aparentemente eu vou ter que criar uma classe "superficie equipotencial" porque
+				//eu vou ter que criar ela e ficar dando update até que eu escolha que ela nao apareça mais
+				//beleza vamo la
+
+				sup->setPonto(sf::Vector2f(i, j), sf::Color::Yellow);
+
+			}
+			else if (v >= 0.0707 && v <= 0.0713)
+			{
+				sup->setPonto(sf::Vector2f(i, j), sf::Color::Green);
+			}
+			else if (v >= 0.0847 && v <= 0.0853)
+			{
+				sup->setPonto(sf::Vector2f(i, j), sf::Color::Red);
+			}
+
+		}
+	}
+}

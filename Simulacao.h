@@ -10,6 +10,7 @@ private:
 	FioCarregado* fio;
 	CargaPontual* carga;
 	Interacao* interacao;
+	SuperficieEquipotencial* sup;
 
 public:
 	Simulacao();

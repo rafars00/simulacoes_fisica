@@ -30,13 +30,17 @@ void CargaPontual::update()
 	float deltatime = 0.4f;
 	float ga = 0.001f;
 
-	a.x = forcaR.x / m - ga*v.x/m;
-	a.y = forcaR.y / m - ga*v.y/m;
+	a.x = forcaR.x / m - ga * v.x/m;
+	a.y = forcaR.y / m - ga * v.y/m;
 
-	v.x += a.x * deltatime;
-	v.y += a.y * deltatime;
+	//v.x += a.x * deltatime;
+	//v.y += a.y * deltatime;
 
-	if (corpo.getPosition().x < 700.0f && corpo.getPosition().x > 100.0f)  //só pra não sair sair da tela
+	if (corpo.getPosition().x < 550.0f && corpo.getPosition().x > 250.0f)  //só pra não sair da tela
+	{
+		v.x += a.x * deltatime;
+		v.y += a.y * deltatime;
 		corpo.move(v * deltatime);
+	}
 
 }

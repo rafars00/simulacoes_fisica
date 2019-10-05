@@ -8,7 +8,8 @@ Simulacao::Simulacao()
 	interacao = new Interacao();
 
 	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Simulação fio carregado", sf::Style::Close);
-	fio = new FioCarregado(40);
+	fio = new FioCarregado(20);
+	sup = new SuperficieEquipotencial();
 }
 
 Simulacao::~Simulacao()
@@ -19,6 +20,7 @@ void Simulacao::executar()
 {
 	bool pause = false;
 	bool corrente = false;
+	bool superficies = false;
 	fio->setFioHorizontalAleatorio();
 
 	while (window->isOpen())
@@ -63,6 +65,14 @@ void Simulacao::executar()
 		{
 			corrente = false;
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::V))
+		{
+			superficies = true;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+		{
+			superficies = false;
+		}
 
 		if (!pause)
 		{
@@ -72,14 +82,23 @@ void Simulacao::executar()
 
 			// Calcula força entre cargas do condutor
 			interacao->calculaForcaCondutor(fio);
+			cout << "pot: " << interacao->calculaPotencial(fio, sf::Vector2f(400.0f, 200.0f)) << endl;
 			
 			if(corrente)
 				interacao->correnteEletrica(fio);
-			
+
 			fio->update();
 
-			cout << "ultima carga: " << fio->getCargas()[24]->getPosicao().x <<
-				" segunda carga: " << fio->getCargas()[1]->getPosicao().x << endl;
+			if (superficies)
+			{
+				delete(sup);
+				sup = new SuperficieEquipotencial();
+				interacao->calculaSuperficiesEquipotenciais(fio, 170.0f, 430.0f, 100.0f, 700.0f, sup);
+				sup->Draw(*window);
+			}
+
+			//cout << "ultima carga: " << fio->getCargas()[24]->getPosicao().x <<
+				//" segunda carga: " << fio->getCargas()[1]->getPosicao().x << endl;
 
 			fio->Draw(*window);
 
@@ -96,6 +115,8 @@ void Simulacao::executar()
 	//delete(carga);
 	delete(interacao);
 	delete(fio);
+	delete(sup);
+	delete(window);
 }
 
 
