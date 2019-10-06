@@ -10,9 +10,12 @@ class FioCarregado
 private:
 	vector<CargaPontual*> carga;
 	int qtd_cargas;
+	float min_esq;
+	float max_dir;
+	float ponto_medio;
 
 public:
-	FioCarregado(int n_cargas);
+	FioCarregado(int n_cargas, float min, float max);
 	~FioCarregado();
 
 	vector<CargaPontual*> getCargas() { return carga; }

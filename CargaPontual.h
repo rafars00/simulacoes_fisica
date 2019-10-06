@@ -32,7 +32,7 @@ public:
 	void setSize(sf::Vector2f s) { corpo.setSize(s); }
 	void draw(sf::RenderWindow& window) { window.draw(corpo); }
 
-	void update();
+	void update(float min_esq, float max_dir);
 
 };
 

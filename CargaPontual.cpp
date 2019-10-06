@@ -25,7 +25,7 @@ void CargaPontual::setPosicao(sf::Vector2f D)
 	corpo.setPosition(D);
 }
 
-void CargaPontual::update()
+void CargaPontual::update(float min_esq, float max_dir)
 {
 	float deltatime = 0.4f;
 	float ga = 0.001f;
@@ -36,7 +36,7 @@ void CargaPontual::update()
 	//v.x += a.x * deltatime;
 	//v.y += a.y * deltatime;
 
-	if (corpo.getPosition().x < 550.0f && corpo.getPosition().x > 250.0f)  //só pra não sair da tela
+	if (corpo.getPosition().x < max_dir && corpo.getPosition().x > min_esq)  //só pra não sair da tela
 	{
 		v.x += a.x * deltatime;
 		v.y += a.y * deltatime;

@@ -8,7 +8,7 @@ Simulacao::Simulacao()
 	interacao = new Interacao();
 
 	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Simulação fio carregado", sf::Style::Close);
-	fio = new FioCarregado(20);
+	fio = new FioCarregado(20, 250.0f, 550.0f); // (n_cargas, min, max)
 	sup = new SuperficieEquipotencial();
 }
 

@@ -1,8 +1,10 @@
 #include "FioCarregado.h"
 
-FioCarregado::FioCarregado(int n_cargas)
+FioCarregado::FioCarregado(int n_cargas, float min, float max)
 {
 	qtd_cargas = n_cargas;
+	min_esq = min;
+	max_dir = max;
 }
 
 FioCarregado::~FioCarregado()
@@ -45,15 +47,15 @@ void FioCarregado::setFioHorizontal()
 void FioCarregado::setFioHorizontalAleatorio()
 {
 	sf::Vector2f d;
-	int limiteEsq, limiteDir;
+	//int limiteEsq, limiteDir;
 	int k = 1;
-	limiteEsq = 50;
-	limiteDir = 650;
+	//limiteEsq = 50;
+	//limiteDir = 650;
 
 	for (int i = 0; i < qtd_cargas; i++)
 	{
 		CargaPontual* nova_carga = new CargaPontual();
-		nova_carga->setPosicao(sf::Vector2f(270.0f + i * 10.0f, 300.0f));
+		nova_carga->setPosicao(sf::Vector2f(min_esq + i * 10.0f, 300.0f));
 		nova_carga->setSize(sf::Vector2f(2.0f, 10.0f));
 
 		//alterna cores
@@ -81,6 +83,6 @@ void FioCarregado::update()
 	for (int i = 0; i < qtd_cargas; i++)
 	{
 		CargaPontual* c = carga[i];
-		c->update();
+		c->update(min_esq, max_dir);
 	}
 }
